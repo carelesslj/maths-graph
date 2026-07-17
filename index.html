@@ -3,26 +3,262 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="refresh" content="0; url=median-demo.html" />
-  <title>三角形中线取值范围演示</title>
+  <title>数学知识动图索引</title>
   <style>
-    body {
-      min-height: 100vh;
-      margin: 0;
-      display: grid;
-      place-items: center;
-      font-family: "Microsoft YaHei", sans-serif;
-      color: #1d2935;
-      background: #f7f1e7;
+    :root {
+      --paper: #f7f1e7;
+      --ink: #1d2935;
+      --muted: #667085;
+      --line: #27374d;
+      --red: #d7493f;
+      --green: #24746b;
+      --gold: #d89b29;
+      --card: rgba(255, 250, 240, .9);
     }
 
-    a {
-      color: #d7493f;
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "Noto Serif SC", "Songti SC", serif;
+      background:
+        linear-gradient(rgba(39, 55, 77, .07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(39, 55, 77, .07) 1px, transparent 1px),
+        radial-gradient(circle at 18% 12%, rgba(216, 155, 41, .2), transparent 26%),
+        linear-gradient(135deg, #f8f0df 0%, #edf4ef 48%, #f4eadb 100%);
+      background-size: 34px 34px, 34px 34px, auto, auto;
+    }
+
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 36px 0 54px;
+    }
+
+    header {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 28px;
+      padding-bottom: 22px;
+      border-bottom: 3px solid var(--line);
+    }
+
+    .eyebrow {
+      width: fit-content;
+      padding: 6px 10px;
+      border: 2px solid var(--line);
+      background: var(--gold);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0;
+      box-shadow: 4px 4px 0 var(--line);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(34px, 6vw, 68px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .chip {
+      border: 2px solid rgba(39, 55, 77, .75);
+      background: rgba(255, 250, 240, .72);
+      padding: 7px 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      display: grid;
+      min-height: 248px;
+      padding: 18px;
+      border: 2px solid var(--line);
+      color: inherit;
+      text-decoration: none;
+      background: var(--card);
+      box-shadow: 10px 10px 0 rgba(39, 55, 77, .95);
+      transition: transform .18s ease, box-shadow .18s ease;
+      overflow: hidden;
+    }
+
+    .card:hover,
+    .card:focus-visible {
+      transform: translate(-3px, -3px);
+      box-shadow: 14px 14px 0 rgba(39, 55, 77, .95);
+      outline: none;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      right: -44px;
+      bottom: -44px;
+      width: 150px;
+      height: 150px;
+      border: 14px solid rgba(215, 73, 63, .18);
+      transform: rotate(18deg);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tag {
+      padding: 5px 8px;
+      border: 2px solid var(--green);
+      color: var(--green);
+      background: rgba(36, 116, 107, .08);
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .number {
+      color: var(--red);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    h2 {
+      position: relative;
+      z-index: 1;
+      margin: 28px 0 8px;
+      font-size: 27px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .desc {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .meta {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-self: end;
+      margin-top: 22px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .meta span {
+      border-left: 4px solid var(--gold);
+      padding: 2px 8px;
+      background: rgba(216, 155, 41, .1);
+    }
+
+    .empty {
+      min-height: 248px;
+      padding: 18px;
+      border: 2px dashed rgba(39, 55, 77, .55);
+      background: rgba(255, 250, 240, .55);
+      color: var(--muted);
+      display: grid;
+      align-content: center;
+      gap: 8px;
+    }
+
+    .empty strong {
+      color: var(--ink);
+      font-size: 22px;
+    }
+
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    code {
+      color: var(--red);
+      font-family: Consolas, "Courier New", monospace;
       font-weight: 700;
     }
   </style>
 </head>
 <body>
-  <p>正在打开演示页：<a href="median-demo.html">median-demo.html</a></p>
+  <main>
+    <header>
+      <div class="eyebrow">Maths Graph Library</div>
+      <h1>数学知识动图索引</h1>
+      <p class="intro">这里集中管理几何、代数、函数等知识点的互动演示。点击标题卡片即可进入对应 HTML 动图页面。</p>
+    </header>
+
+    <div class="toolbar" aria-label="分类统计">
+      <span class="chip">全部：1</span>
+      <span class="chip">几何：1</span>
+      <span class="chip">更新方式：新增 HTML 后在首页添加条目</span>
+    </div>
+
+    <section class="grid" aria-label="动图列表">
+      <a class="card" href="median-demo.html">
+        <div class="card-top">
+          <span class="tag">几何 · 三角形</span>
+          <span class="number">01</span>
+        </div>
+        <h2>三角形中线取值范围</h2>
+        <p class="desc">演示 EP 为 △DEF 的中线时，如何由 DE=3、EF=5 推出 1 &lt; x &lt; 4，并给出同类题通用公式。</p>
+        <div class="meta">
+          <span>中线公式</span>
+          <span>动态夹角</span>
+          <span>取值范围</span>
+        </div>
+      </a>
+
+      <div class="empty">
+        <strong>预留位置</strong>
+        <span>以后新的知识动图可以继续放在这里，例如函数图像、相似三角形、圆幂定理等。</span>
+      </div>
+    </section>
+
+    <footer>
+      维护提示：以后新增页面时，把新的 <code>.html</code> 文件放到仓库根目录，再在本页复制一张卡片并修改标题、链接和说明即可。
+    </footer>
+  </main>
 </body>
 </html>
